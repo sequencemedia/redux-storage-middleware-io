@@ -54,8 +54,6 @@ async function start ({ host = 'localhost', port = 5000 }) {
     fetch(`${server.info.uri}/api/timestamp`)
       .then((response) => response.json())
       .then(({ timestamp }) => {
-        console.log(timestamp, timestamp instanceof Date)
-
         const state = { timestamp: { timestamp: new Date(timestamp) } }
 
         return {
