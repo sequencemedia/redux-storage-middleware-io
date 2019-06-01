@@ -16,8 +16,11 @@ import * as api from 'redux-storage-middleware-io/client/api/timestamp'
 function * timestamp () {
   try {
     const { timestamp } = yield call(api.requestTimestamp)
+
     yield put(requestTimestampSucceeded(timestamp))
   } catch ({ message = 'No error message defined' }) {
+    console.error(message)
+
     yield put(requestTimestampFailed({ message }))
   }
 }

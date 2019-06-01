@@ -1,3 +1,10 @@
+
+import {
+  STORAGE_FETCH,
+  STORAGE_STORE,
+  STORAGE_WRITE
+} from 'redux-storage-middleware/lib/actions'
+
 import {
   REQUEST_TIMESTAMP,
   REQUEST_TIMESTAMP_SUCCEEDED,
@@ -20,6 +27,84 @@ export default function timestampReducer (state = { timestamp: new Date() }, { t
     case REQUEST_TIMESTAMP_FAILED:
 
       return { ...state, ...action }
+    case STORAGE_WRITE:
+    {
+      const {
+        data: {
+          type: TYPE,
+          ...ACTION
+        } = {}
+      } = action
+
+      switch (TYPE) {
+        case REQUEST_TIMESTAMP:
+
+          return { ...state, ...ACTION }
+        default:
+
+          return state
+      }
+    }
+
+    case STORAGE_FETCH:
+    {
+      const {
+        data: {
+          type: TYPE,
+          ...ACTION
+        } = {}
+      } = action
+
+      switch (TYPE) {
+        case REQUEST_TIMESTAMP:
+
+          return { ...state, ...ACTION }
+        case REQUEST_TIMESTAMP_SUCCEEDED:
+        {
+          const {
+            timestamp
+          } = ACTION
+
+          return { ...state, ...ACTION, timestamp: new Date(timestamp) }
+        }
+        case REQUEST_TIMESTAMP_FAILED:
+
+          return { ...state, ...ACTION }
+        default:
+
+          return state
+      }
+    }
+
+    case STORAGE_STORE:
+    {
+      const {
+        data: {
+          type: TYPE,
+          ...ACTION
+        } = {}
+      } = action
+
+      switch (TYPE) {
+        case REQUEST_TIMESTAMP:
+
+          return { ...state, ...ACTION }
+        case REQUEST_TIMESTAMP_SUCCEEDED:
+        {
+          const {
+            timestamp
+          } = ACTION
+
+          return { ...state, ...ACTION, timestamp: new Date(timestamp) }
+        }
+        case REQUEST_TIMESTAMP_FAILED:
+
+          return { ...state, ...ACTION }
+        default:
+
+          return state
+      }
+    }
     default:
 
       return state

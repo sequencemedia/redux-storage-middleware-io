@@ -27,6 +27,14 @@ const store = configureStore({
   reduxStorage: reduxStorageInitialState()
 })
 
+Object
+  .entries(reduxStorageInitialState())
+  .forEach(([key, value]) => {
+    console.group(key)
+    console.table(value)
+    console.groupEnd()
+  })
+
 const App = (
   <Provider store={store}>
     <IndexPage />
@@ -39,11 +47,3 @@ ReactDOM.render(
   App,
   app
 )
-
-Object
-  .entries(reduxStorageInitialState())
-  .forEach(([key, value]) => {
-    console.group(key)
-    console.table(value)
-    console.groupEnd()
-  })

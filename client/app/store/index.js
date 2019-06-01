@@ -33,8 +33,16 @@ export const configureStore = (initialState) => {
     {
       type: 'REQUEST_TIMESTAMP',
       meta: {
+        type: 'REQUEST_TIMESTAMP_FAILED',
+        cacheFor: 1000 * 60 * 60 * 24 + 1000 * 60 + 60
+      }
+    },
+
+    {
+      type: 'REQUEST_TIMESTAMP',
+      meta: {
         type: 'REQUEST_TIMESTAMP_SUCCEEDED',
-        cacheFor: ((1000 * 60) * 60) + 1
+        cacheFor: 1000 * 60 * 60 * 24 + 1000 * 60 + 60
       }
     }
   ])
