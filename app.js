@@ -14,6 +14,8 @@ const Handlebars = require('handlebars')
 
 const fetch = require('isomorphic-fetch')
 
+const chalk = require('chalk')
+
 const {
   renderToString
 } = require('@sequencemedia/react-redux-render')
@@ -111,7 +113,10 @@ async function start ({ host = 'localhost', port = 5000 }) {
 
   await server.start()
 
-  console.log(`\nredux-storage-middleware [${server.info.uri}]\n`)
+  console.log(`
+    ${chalk.gray('redux-storage-middleware')} ${chalk.gray('[')}${chalk.white(server.info.protocol)}${chalk.gray('://')}${chalk.white(server.info.host)}${chalk.gray(':')}${chalk.white(server.info.port)}${chalk.gray(']')}
+    ${chalk.white(new Date(server.info.started))}
+  `)
 }
 
 start(nconf.get('server'))
