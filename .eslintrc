@@ -16,7 +16,10 @@
   ],
   "rules": {
     "react/display-name": 0,
-    "linebreak-style": ["error", "unix"]
+    "linebreak-style": [
+      "error",
+      "unix"
+    ]
   },
   "settings": {
     "react": {
