@@ -45,7 +45,7 @@
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-saga": "^1.1.3",
-    "redux-storage-middleware": "1.0.121"
+    "redux-storage-middleware": "1.0.122"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
