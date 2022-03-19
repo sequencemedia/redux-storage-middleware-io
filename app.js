@@ -1,6 +1,8 @@
 require('module-alias/register')
 require('@babel/register')
 
+const debug = require('debug')
+
 const path = require('path')
 
 const nconf = require('nconf')
@@ -14,11 +16,21 @@ const Handlebars = require('handlebars')
 
 const fetch = require('isomorphic-fetch')
 
-const chalk = require('chalk')
-
 const {
   renderToString
 } = require('@sequencemedia/react-redux-render')
+
+const {
+  env: {
+    DEBUG = 'redux-storage-middleware-io'
+  }
+} = process
+
+debug.enable(DEBUG)
+
+const log = debug('redux-storage-middleware-io')
+
+log('`redux-storage-middleware-io` is awake')
 
 const modulePath = process.cwd()
 const serverPath = path.resolve(modulePath, 'server')
@@ -38,7 +50,7 @@ const {
 const { default: IndexPage } = require('redux-storage-middleware-io/client/app/components/index-page')
 
 const error = (e) => {
-  console.error(e)
+  log(e)
 
   return (Boom.isBoom(e))
     ? e
@@ -51,6 +63,22 @@ nconf
 
 async function start ({ host = 'localhost', port = 5000 }) {
   const server = Hapi.server({ host, port })
+
+  server.events.on('start', () => {
+    const {
+      info
+    } = server
+
+    log(info)
+  })
+
+  server.events.on('stop', () => {
+    const {
+      info
+    } = server
+
+    log(info)
+  })
 
   const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => (
     fetch(`${server.info.uri}/api/timestamp`)
@@ -112,11 +140,6 @@ async function start ({ host = 'localhost', port = 5000 }) {
   ])
 
   await server.start()
-
-  console.log(`
-    ${chalk.gray('redux-storage-middleware')} ${chalk.gray('[')}${chalk.white(server.info.protocol)}${chalk.gray('://')}${chalk.white(server.info.host)}${chalk.gray(':')}${chalk.white(server.info.port)}${chalk.gray(']')}
-    ${chalk.white(new Date(server.info.started))}
-  `)
 }
 
 start(nconf.get('server'))
