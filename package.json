@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
-    "@hapi/boom": "^9.1.4",
+    "@hapi/boom": "^10.0.0",
     "@hapi/good": "^9.0.1",
     "@hapi/good-console": "^9.0.1",
     "@hapi/good-squeeze": "^6.0.0",
