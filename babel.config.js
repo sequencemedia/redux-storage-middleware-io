@@ -11,11 +11,15 @@ const presets = [
       corejs: 3
     }
   ],
-  '@babel/react'
+  [
+    '@babel/react',
+    {
+      runtime: 'automatic'
+    }
+  ]
 ]
 
 const plugins = [
-  '@babel/transform-runtime',
   '@babel/proposal-export-default-from',
   '@babel/proposal-export-namespace-from',
   [
