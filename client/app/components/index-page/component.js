@@ -1,18 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import moment from 'moment'
+const DATETIME = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric'
+}
+
+function renderTimestamp (timestamp) {
+  if (timestamp) {
+    const dateTime = new Date(timestamp)
+    return (
+      <p>{dateTime.toLocaleString('en-GB', DATETIME)}</p>
+    )
+  }
+
+  return null
+}
 
 const IndexPage = ({ timestamp, onClick }) => (
   <section>
     <h1>
       Index Page
     </h1>
-    {do {
-      if (timestamp) {
-        <p>{moment(timestamp).format('MMMM Do YYYY, h:mm:ss a')}</p>
-      }
-    }}
+    {renderTimestamp(timestamp)}
     <button onClick={onClick}>
       Timestamp
     </button>
@@ -20,7 +35,7 @@ const IndexPage = ({ timestamp, onClick }) => (
 )
 
 IndexPage.propTypes = {
-  timestamp: PropTypes.instanceOf(Date).isRequired,
+  timestamp: PropTypes.instanceOf(Date),
   onClick: PropTypes.func.isRequired
 }
 

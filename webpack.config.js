@@ -9,23 +9,44 @@ const path = require('path')
 const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin')
+
 const {
   EnvironmentPlugin,
   SourceMapDevToolPlugin
 } = require('webpack')
+
 const TerserPlugin = require('terser-webpack-plugin')
 
-const modulePath = process.cwd()
-const clientPath = path.resolve(modulePath, 'client')
-const assetsPath = path.resolve(modulePath, 'public/assets')
+const clientPath = path.resolve('./client')
+const assetsPath = path.resolve('./public/assets/js')
 
-module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
-  mode: NODE_ENV,
+const {
+  env: {
+    NODE_ENV = 'production'
+  } = {}
+} = process
+
+module.exports = (env, { mode = NODE_ENV }) => ({
+  mode,
   entry: {
-    app: path.resolve(clientPath, 'index.js')
+    app: {
+      import: [
+        path.join(clientPath, 'index.js')
+      ],
+      dependOn: [
+        'vendors'
+      ]
+    },
+    vendors: [
+      'react',
+      'react-dom',
+      'prop-types',
+      'redux',
+      'redux-saga'
+    ]
   },
   output: {
-    path: path.join(assetsPath, 'js'),
+    path: assetsPath,
     filename: '[name].js'
   },
   stats: {
@@ -35,7 +56,9 @@ module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
     rules: [
       {
         test: /\.js?$/,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader'
+        },
         exclude: /node_modules/
       }
     ]
@@ -44,14 +67,15 @@ module.exports = ({ NODE_ENV = 'production' } = process.env) => ({
     new CleanWebpackPlugin({
       verbose: false,
       cleanOnceBeforeBuildPatterns: [
-        path.join(assetsPath, 'js').concat('/*.js'),
-        path.join(assetsPath, 'js').concat('/*.js.map')
+        path.join(assetsPath, '*.js'),
+        path.join(assetsPath, '*.js.map')
       ]
     }),
     new EnvironmentPlugin({ NODE_ENV }),
     new SourceMapDevToolPlugin({ filename: '[name].js.map' })
   ],
   optimization: {
+    runtimeChunk: 'single',
     minimize: true,
     minimizer: [
       new TerserPlugin()
