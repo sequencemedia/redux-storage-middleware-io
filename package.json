@@ -32,7 +32,7 @@
     "@hapi/inert": "^7.1.0",
     "@hapi/joi": "^17.1.1",
     "@hapi/vision": "^7.0.1",
-    "@sequencemedia/react-redux-render": "^2.0.379",
+    "@sequencemedia/react-redux-render": "^2.0.381",
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
     "handlebars": "^4.7.7",
@@ -46,7 +46,7 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3",
-    "redux-storage-middleware": "1.0.384"
+    "redux-storage-middleware": "1.0.386"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -63,7 +63,7 @@
     "babel-plugin-module-resolver": "^5.0.0",
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^8.0.1",
-    "core-js": "^3.29.1",
+    "core-js": "^3.30.0",
     "eslint": "^8.37.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
