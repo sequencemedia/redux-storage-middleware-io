@@ -1,6 +1,6 @@
 {
   "name": "redux-storage-middleware-io",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Redux Storage Middleware",
   "private": true,
   "main": "./app.js",
