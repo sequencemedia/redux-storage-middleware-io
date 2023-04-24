@@ -30,7 +30,7 @@
     "@hapi/inert": "^7.1.0",
     "@hapi/joi": "^17.1.1",
     "@hapi/vision": "^7.0.1",
-    "@sequencemedia/react-redux-render": "^2.0.394",
+    "@sequencemedia/react-redux-render": "^2.0.395",
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
     "handlebars": "^4.7.7",
@@ -44,7 +44,7 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3",
-    "redux-storage-middleware": "1.0.403"
+    "redux-storage-middleware": "1.0.404"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
