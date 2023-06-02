@@ -36,8 +36,6 @@ const plugins = [
   ],
   [
     'module-resolver', {
-      root: ['.'],
-      cwd: 'babelrc',
       alias: {
         'redux-storage-middleware-io': './'
       }
