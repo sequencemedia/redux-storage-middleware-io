@@ -1,24 +1,27 @@
-require('module-alias/register')
-require('@babel/register')
+import debug from 'debug'
 
-const debug = require('debug')
+import path from 'path'
 
-const path = require('path')
+import nconf from 'nconf'
 
-const nconf = require('nconf')
+import Hapi from '@hapi/hapi'
+import Boom from '@hapi/boom'
+import inert from '@hapi/inert'
+import vision from '@hapi/vision'
 
-const Hapi = require('@hapi/hapi')
-const Boom = require('@hapi/boom')
-const inert = require('@hapi/inert')
-const vision = require('@hapi/vision')
+import Handlebars from 'handlebars'
 
-const Handlebars = require('handlebars')
-
-const fetch = require('isomorphic-fetch')
-
-const {
+import {
   renderToString
-} = require('@sequencemedia/react-redux-render')
+} from '@sequencemedia/react-redux-render'
+
+import config from '#server/config'
+
+import {
+  configureStore
+} from '#client/app/store'
+
+import IndexPage from '#client/app/components/index-page'
 
 const {
   env: {
@@ -37,19 +40,7 @@ const serverPath = path.resolve(modulePath, 'server')
 const publicPath = path.resolve(modulePath, 'public')
 const assetsPath = path.resolve(publicPath, 'assets')
 
-const config = require('redux-storage-middleware-io/server/config')()
-
-const {
-  good
-} = require('redux-storage-middleware-io/server/config/good')
-
-const {
-  configureStore
-} = require('redux-storage-middleware-io/client/app/store')
-
-const { default: IndexPage } = require('redux-storage-middleware-io/client/app/components/index-page')
-
-const error = (e) => {
+function error (e) {
   log(e)
 
   return (Boom.isBoom(e))
@@ -80,22 +71,24 @@ async function start ({ host = 'localhost', port = 5000 }) {
     log(info)
   })
 
-  const handler = ({ params: { page = 0 }, url: { pathname = '/' } }, h) => (
-    fetch(`${server.info.uri}/api/timestamp`)
-      .then((response) => response.json())
-      .then(({ timestamp }) => {
-        const state = { timestamp: { timestamp: new Date(timestamp) } }
+  function handler (request, h) {
+    return (
+      fetch(`${server.info.uri}/api/timestamp`)
+        .then((response) => response.json())
+        .then(({ timestamp }) => {
+          const state = { timestamp: { timestamp: new Date(timestamp) } }
 
-        return {
-          app: renderToString(configureStore(state), IndexPage),
-          state
-        }
-      })
-      .then((context) => h.view('index', context))
-      .catch(error)
-  )
+          return {
+            app: renderToString(configureStore(state), IndexPage),
+            state
+          }
+        })
+        .then((context) => h.view('index', context))
+        .catch(error)
+    )
+  }
 
-  await server.register([good, inert, vision])
+  await server.register([inert, vision])
 
   server.views({
     relativeTo: modulePath,
@@ -116,7 +109,9 @@ async function start ({ host = 'localhost', port = 5000 }) {
     {
       method: 'GET',
       path: '/favicon.ico',
-      handler: (request, h) => h.redirect('/assets/favicon.ico')
+      handler (request, h) {
+        return h.redirect('/assets/favicon.ico')
+      }
     },
     {
       method: 'GET',
@@ -135,7 +130,9 @@ async function start ({ host = 'localhost', port = 5000 }) {
     }, {
       method: '*',
       path: '/api/timestamp',
-      handler: () => ({ timestamp: new Date() })
+      handler () {
+        return { timestamp: new Date() }
+      }
     }
   ])
 

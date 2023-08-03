@@ -9,9 +9,9 @@ import {
   REQUEST_TIMESTAMP,
   requestTimestampSucceeded,
   requestTimestampFailed
-} from 'redux-storage-middleware-io/client/app/actions/timestamp'
+} from '#client/app/actions/timestamp'
 
-import * as api from 'redux-storage-middleware-io/client/api/timestamp'
+import * as api from '#client/api/timestamp'
 
 function * timestamp () {
   try {

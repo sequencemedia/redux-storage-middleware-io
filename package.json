@@ -3,7 +3,8 @@
   "version": "1.0.107",
   "description": "Redux Storage Middleware",
   "private": true,
-  "main": "./app.js",
+  "main": "./app.mjs",
+  "type": "module",
   "author": {
     "name": "Jonathan Perry for Sequence Media Limited",
     "email": "sequencemedia@sequencemedia.net",
@@ -16,16 +17,13 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "cross-env NODE_ENV=production node .",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .mjs,.cjs,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.6",
     "@hapi/boom": "^10.0.1",
-    "@hapi/good": "^9.0.1",
-    "@hapi/good-console": "^9.0.1",
-    "@hapi/good-squeeze": "^6.0.0",
     "@hapi/hapi": "^21.3.2",
     "@hapi/inert": "^7.1.0",
     "@hapi/joi": "^17.1.1",
@@ -34,8 +32,6 @@
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
     "handlebars": "^4.7.8",
-    "isomorphic-fetch": "^3.0.0",
-    "module-alias": "^2.2.3",
     "moment": "^2.29.4",
     "nconf": "^0.12.0",
     "prop-types": "^15.8.1",
@@ -44,35 +40,35 @@
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3",
-    "redux-storage-middleware": "1.0.465"
+    "redux-storage-middleware": "1.1.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/eslint-parser": "^7.22.9",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-export-default-from": "^7.22.5",
-    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@babel/preset-env": "^7.22.9",
     "@babel/preset-react": "^7.22.5",
     "@babel/register": "^7.22.5",
     "@sequencemedia/hooks": "^1.0.444",
     "babel-loader": "^9.1.3",
     "babel-plugin-minify-dead-code-elimination": "^0.5.2",
-    "babel-plugin-module-resolver": "^5.0.0",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.32.0",
     "eslint": "^8.46.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-import-resolver-babel-module": "^5.3.2",
     "eslint-plugin-react": "^7.33.1",
-    "gulp-develop-server": "^0.5.2",
     "husky": "^8.0.3",
     "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   },
-  "_moduleAliases": {
-    "redux-storage-middleware-io": "./"
+  "imports": {
+    "#client/api/timestamp": "./client/api/timestamp/index.mjs",
+    "#client/app/actions/timestamp": "./client/app/actions/timestamp/index.mjs",
+    "#client/app/components/index-page": "./client/app/components/index-page/index.mjs",
+    "#client/app/reducers": "./client/app/reducers/index.mjs",
+    "#client/app/sagas": "./client/app/sagas/index.mjs",
+    "#client/app/store": "./client/app/store/index.mjs",
+    "#server/config/good": "./server/config/good/index.mjs",
+    "#server/config": "./server/config/index.mjs"
   }
 }

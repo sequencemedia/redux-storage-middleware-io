@@ -20,25 +20,10 @@ const presets = [
 ]
 
 const plugins = [
-  '@babel/proposal-export-default-from',
-  '@babel/proposal-export-namespace-from',
-  [
-    '@babel/proposal-class-properties',
-    {
-      loose: false
-    }
-  ],
   [
     'minify-dead-code-elimination',
     {
       optimizeRawSize: true
-    }
-  ],
-  [
-    'module-resolver', {
-      alias: {
-        'redux-storage-middleware-io': './'
-      }
     }
   ]
 ]

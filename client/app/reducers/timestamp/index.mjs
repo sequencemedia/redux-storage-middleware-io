@@ -2,13 +2,13 @@ import {
   STORAGE_FETCH,
   STORAGE_STORE,
   STORAGE_WRITE
-} from 'redux-storage-middleware/lib/actions'
+} from 'redux-storage-middleware/actions'
 
 import {
   REQUEST_TIMESTAMP,
   REQUEST_TIMESTAMP_SUCCEEDED,
   REQUEST_TIMESTAMP_FAILED
-} from 'redux-storage-middleware-io/client/app/actions/timestamp'
+} from '#client/app/actions/timestamp'
 
 export default function timestampReducer (state = { timestamp: new Date() }, { type, ...action } = {}) {
   switch (type) {

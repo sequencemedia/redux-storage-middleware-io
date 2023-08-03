@@ -22,21 +22,21 @@ function renderTimestamp (timestamp) {
   return null
 }
 
-const IndexPage = ({ timestamp, onClick }) => (
-  <section>
-    <h1>
-      Index Page
-    </h1>
-    {renderTimestamp(timestamp)}
-    <button onClick={onClick}>
-      Timestamp
-    </button>
-  </section>
-)
+export default function IndexPage ({ timestamp, onClick }) {
+  return (
+    <section>
+      <h1>
+        Index Page
+      </h1>
+      {renderTimestamp(timestamp)}
+      <button onClick={onClick}>
+        Timestamp
+      </button>
+    </section>
+  )
+}
 
 IndexPage.propTypes = {
   timestamp: PropTypes.instanceOf(Date),
   onClick: PropTypes.func.isRequired
 }
-
-export default IndexPage

@@ -4,12 +4,12 @@ import {
   applyMiddleware
 } from 'redux'
 
-import createStorageMapMiddleware from 'redux-storage-middleware/lib/storage-map'
-import storageMiddleware from 'redux-storage-middleware/lib/storage'
+import createStorageMapMiddleware from 'redux-storage-middleware/storage-map'
+import storageMiddleware from 'redux-storage-middleware/storage'
 import createSagaMiddleware from 'redux-saga'
 
-import reducers from 'redux-storage-middleware-io/client/app/reducers'
-import sagas from 'redux-storage-middleware-io/client/app/sagas'
+import reducers from '#client/app/reducers'
+import sagas from '#client/app/sagas'
 
 const log = () => (next) => (action) => {
   const {

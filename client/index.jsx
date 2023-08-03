@@ -2,18 +2,17 @@ import React from 'react'
 import {
   createRoot
 } from 'react-dom/client'
-
 import {
   Provider
 } from 'react-redux'
 
 import reduxStorageInitialState from 'redux-storage-middleware/initial-state'
 
-import IndexPage from 'redux-storage-middleware-io/client/app/components/index-page'
+import IndexPage from './app/components/index-page/index.mjs'
 
 import {
   configureStore
-} from './app/store'
+} from './app/store/index.mjs'
 
 const state = JSON.parse(document.getElementById('initial-state').textContent || '{}')
 
@@ -44,6 +43,10 @@ const App = (
 )
 
 const app = document.getElementById('app')
+
+console.log({ createRoot, app, App })
+
+export default <App />
 
 createRoot(app)
   .render(<App />)

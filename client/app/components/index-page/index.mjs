@@ -4,9 +4,9 @@ import {
 
 import {
   requestTimestamp
-} from 'redux-storage-middleware-io/client/app/actions/timestamp'
+} from '#client/app/actions/timestamp'
 
-import Component from './component'
+import Component from './component.cjs'
 
 const mergeStateToProps = ({ timestamp }) => ({ ...timestamp })
 
