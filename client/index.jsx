@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  createRoot
+  hydrateRoot
 } from 'react-dom/client'
 import {
   Provider
@@ -36,17 +36,17 @@ Object
     console.groupEnd()
   })
 
-const App = (
-  <Provider store={store}>
-    <IndexPage />
-  </Provider>
-)
+function App () {
+  return (
+    <Provider store={store}>
+      <IndexPage />
+    </Provider>
+  )
+}
 
 const app = document.getElementById('app')
 
-console.log({ createRoot, app, App })
-
-export default <App />
-
-createRoot(app)
-  .render(<App />)
+hydrateRoot(
+  app,
+  <App />
+)
