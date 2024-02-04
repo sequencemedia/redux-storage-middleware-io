@@ -1,6 +1,7 @@
 const presets = [
   [
-    '@babel/env', {
+    '@babel/env',
+    {
       targets: {
         node: 'current',
         browsers: [
