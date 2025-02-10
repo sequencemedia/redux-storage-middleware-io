@@ -45,9 +45,9 @@
     "redux-storage-middleware": "1.1.196"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.7",
-    "@babel/eslint-parser": "^7.26.5",
-    "@babel/preset-env": "^7.26.7",
+    "@babel/core": "^7.26.8",
+    "@babel/eslint-parser": "^7.26.8",
+    "@babel/preset-env": "^7.26.8",
     "@babel/preset-react": "^7.26.3",
     "@babel/register": "^7.25.9",
     "babel-loader": "^9.2.1",
